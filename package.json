@@ -1,0 +1,17 @@
+{
+  "name": "node-google-dfp",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "soap": "~0.4.2"
+  },
+  "devDependencies": {
+    "googleapis": "^0.7.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
