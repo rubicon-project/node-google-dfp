@@ -1,17 +1,19 @@
 {
   "name": "node-google-dfp",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Google DFP API Library for NodeJS",
   "main": "index.js",
   "dependencies": {
+    "googleapis": "^0.7.0",
     "soap": "~0.4.2"
   },
   "devDependencies": {
-    "googleapis": "^0.7.0"
+    "googleapis": "^0.7.0",
+    "soap": "^0.4.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "ShinyAds",
   "license": "ISC"
 }
