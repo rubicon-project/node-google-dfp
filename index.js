@@ -44,7 +44,7 @@ NodeGoogleDfp.prototype.getAuthenticationUrl = function() {
 
 
 NodeGoogleDfp.prototype.setAuthenticationTokenCode = function(code, callback) {
-	
+
 	this.oauth2Client = new OAuth2(this.clientId, this.clientSecret, this.redirectUrl);
 
 	this.oauth2Client.getToken(code, function(err, tokens) {
