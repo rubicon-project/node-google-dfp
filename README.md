@@ -1,4 +1,4 @@
-```
+```JavaScript
 var DfpClass = require('./lib/DfpUser');
 var dfpInst = new DfpClass(NETWORK_CODE, APP_NAME);
 
