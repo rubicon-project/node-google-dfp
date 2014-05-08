@@ -27,12 +27,13 @@ dfpInst.api.settings.redirect_url = "YOUR OAUTH REDIRECT URL";
 
     Also checkout the api.properties.js file
 */
-dfpInst.getService('LineItemService', function (lineItemService) {
+dfp.getService('LineItemService', function (lineItemService) {
 
-  var args = { filterStatement: { query: 'WHERE id = 103207340' } };
+  var args = lineItemService.Statement('WHERE id = 103207340');
 
   lineItemService.getLineItemsByStatement(args, function (results) {
     console.log(results);
   });
+
 });
 ```
