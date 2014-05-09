@@ -12,7 +12,12 @@ var dfp = new DfpClass(NETWORK_CODE, APP_NAME);
 These parameters could be filled out in the api.properties.js file or for greater flexibility you can code them in
 
 ```JavaScript
-dfp.setSettings({client_id : "YOUR CLIENT ID", client_secret : "YOUR CLIENT SECRET", refresh_token : "A REFRESH TOKEN", redirect_url : "YOUR OAUTH REDIRECT URL"});
+dfp.setSettings({
+  client_id : "YOUR CLIENT ID", 
+  client_secret : "YOUR CLIENT SECRET", 
+  refresh_token : "A REFRESH TOKEN", 
+  redirect_url : "YOUR OAUTH REDIRECT URL"
+});
 ```
 
 You can instance any of DFP's API Services; https://developers.google.com/doubleclick-publishers/docs/start
