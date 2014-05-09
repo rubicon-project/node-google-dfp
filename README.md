@@ -1,37 +1,33 @@
 # Google DFP API Helper for NodeJS
 
 ## Basics
+
+Initialize the DFP Instance, there is one parameter which allows you to supply an alternate api.properties file, without this parameters it will get api.properties.js in project root directory
+
 ```JavaScript
-/*
-    Initialize the DFP Instance, there is one parameter which
-    allows you to supply an alternate api.properties file,
-    without this parameters it will get api.properties.js in
-    project root directory
-*/
 var DfpClass = require('./lib/DfpUser');
-var dfpInst = new DfpClass(NETWORK_CODE, 'APP_NAME');
-dfpInst.loadConfig();
+var dfp = new DfpClass(NETWORK_CODE, APP_NAME);
+dfp.loadConfig();
+```
 
-/*
-    These parameters could be filled out in the api.properties.js
-    file or for greater flexibility you can code them in
-*/
-dfpInst.api.settings.client_id = "YOUR CLIENT ID";
-dfpInst.api.settings.client_secret = "YOUR CLIENT SECRET";
-dfpInst.api.settings.refresh_token = "A REFRESH TOKEN";
-dfpInst.api.settings.redirect_url = "YOUR OAUTH REDIRECT URL";
+These parameters could be filled out in the api.properties.js file or for greater flexibility you can code them in
 
-/*
-    You can instance any of DFP's API Services
-    https://developers.google.com/doubleclick-publishers/docs/start
+```JavaScript
+dfp.api.settings.client_id = "YOUR CLIENT ID";
+dfp.api.settings.client_secret = "YOUR CLIENT SECRET";
+dfp.api.settings.refresh_token = "A REFRESH TOKEN";
+dfp.api.settings.redirect_url = "YOUR OAUTH REDIRECT URL";
+```
 
-    Also checkout the api.properties.js file
-*/
+You can instance any of DFP's API Services; https://developers.google.com/doubleclick-publishers/docs/start
+Also checkout the api.properties.js file.
+
+```JavaScript
 dfp.getService('LineItemService', function (lineItemService) {
 
-  var args = lineItemService.Statement('WHERE id = 103207340');
+  var statement = lineItemService.Statement('WHERE id = 103207340');
 
-  lineItemService.getLineItemsByStatement(args, function (results) {
+  lineItemService.getLineItemsByStatement(statement, function (results) {
     console.log(results);
   });
 
