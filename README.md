@@ -1,15 +1,21 @@
-# Google DFP API Helper for NodeJS
+# Google DFP API Client for NodeJS
 
 ## Basics
 
-Initialize the DFP Instance, there is one parameter which allows you to supply an alternate api.properties file, without this parameters it will get api.properties.js in project root directory
+Initialize the DFP Instance.  The third parameter can be the filename of a DFP version configuration file.  Without that parameter, the api.properties.js file will be loaded from the project's root directory.
 
 ```JavaScript
 var DfpClass = require('./lib/DfpUser');
 var dfp = new DfpClass(NETWORK_CODE, APP_NAME);
 ```
 
-These parameters could be filled out in the api.properties.js file or for greater flexibility you can code them in
+Alternatively, you can call loadConfig() to load an alternate api.properties.js file.
+
+```JavaScript
+dfp.loadConfig(FILENAME);
+```
+
+Next, setup your client settings and your user's OAUTH token information.
 
 ```JavaScript
 dfp.setSettings({
