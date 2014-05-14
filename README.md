@@ -2,17 +2,11 @@
 
 ## Basics
 
-Initialize the DFP Instance.  The third parameter can be the filename of a DFP version configuration file.  Without that parameter, the api.properties.js file will be loaded from the project's root directory.
+Initialize the DFP Instance. 
 
 ```JavaScript
 var DfpClass = require('./lib/DfpUser');
-var dfp = new DfpClass(NETWORK_CODE, APP_NAME);
-```
-
-Alternatively, you can call loadConfig() to load an alternate api.properties.js file.
-
-```JavaScript
-dfp.loadConfig(FILENAME);
+var dfp = new DfpClass(NETWORK_CODE, APP_NAME, VERSION);
 ```
 
 Next, setup your client settings and your user's OAUTH token information.
@@ -27,12 +21,14 @@ dfp.setSettings({
 ```
 
 You can instance any of DFP's API Services; https://developers.google.com/doubleclick-publishers/docs/start
-Also checkout the api.properties.js file.
+
 
 ```JavaScript
 dfp.getService('LineItemService', function (lineItemService) {
 
-  var statement = lineItemService.Statement('WHERE id = 103207340');
+  var DfpStatement = require('./Lib/DfpStatement');
+
+  var statement = DfpStatement('WHERE id = 103207340');
 
   lineItemService.getLineItemsByStatement(statement, function (results) {
     console.log(results);
