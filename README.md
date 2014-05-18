@@ -2,7 +2,7 @@
 
 ## Basics
 
-Initialize the DFP Instance. 
+Initialize the DFP Instance.
 
 ```JavaScript
 var DfpClass = require('./lib/Dfp');
@@ -13,9 +13,9 @@ Next, setup your client settings and your user's OAUTH token information.
 
 ```JavaScript
 dfp.setSettings({
-  client_id : "YOUR CLIENT ID", 
-  client_secret : "YOUR CLIENT SECRET", 
-  refresh_token : "A REFRESH TOKEN", 
+  client_id : "YOUR CLIENT ID",
+  client_secret : "YOUR CLIENT SECRET",
+  refresh_token : "A REFRESH TOKEN",
   redirect_url : "YOUR OAUTH REDIRECT URL"
 });
 ```
@@ -26,7 +26,7 @@ You can instance any of DFP's API Services; https://developers.google.com/double
 ```JavaScript
 dfp.getService('LineItemService', function (lineItemService) {
 
-  var statement = new Dfp.Statement('WHERE id = 103207340');
+  var statement = new DfpClass.Statement('WHERE id = 103207340');
 
   lineItemService.getLineItemsByStatement(statement, function (results) {
     console.log(results);
