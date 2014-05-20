@@ -1,5 +1,4 @@
 // DfpCredentials
-
 module.exports = {
   applicationName : "",                // Your application's name
   client_id : "",                      // Your application's DFP ID

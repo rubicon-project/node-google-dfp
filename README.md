@@ -28,7 +28,7 @@ dfp.getService('LineItemService', function (lineItemService) {
 
   var statement = new DfpClass.Statement('WHERE id = 103207340');
 
-  lineItemService.getLineItemsByStatement(statement, function (results) {
+  lineItemService.getLineItemsByStatement(statement, function (err, results) {
     console.log(results);
   });
 
