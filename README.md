@@ -35,6 +35,12 @@ dfp.getService('LineItemService', function (lineItemService) {
 });
 ```
 
+Known Issues
+------------
+
+1) OAuth Support for more than just Refresh Token
+2) No unit tests
+
 How to contribute
 -----------
 
