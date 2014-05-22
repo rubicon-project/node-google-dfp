@@ -8,7 +8,7 @@ dfpUser.setSettings(dfpConfig);
 
 dfpUser.getService('OrderService', function (orderService) {
   var args = { orders: [{
-      name: 'Full Campaign #40',
+      name: 'Full Campaign #67',
       notes: 'It cannot be this simple!',
       advertiserId: '10209990',                 // Must correspond to an advertiserId in your DFP instance
       traffickerId: '50819180'                  // Must correspond to an traffickerId in your DFP instance
@@ -33,7 +33,7 @@ dfpUser.getService('OrderService', function (orderService) {
         lineItemType: 'STANDARD',
         priority: 8,
         unitsBought: 100000,
-        costPerUnit: new Dfp.Money(5.6, 'CAD'),
+        costPerUnit: Dfp.Money(5.6, 'CAD'),
         costType: 'CPM',
         creativePlaceholders: { size: {
           width: 728,
@@ -87,6 +87,24 @@ dfpUser.getService('OrderService', function (orderService) {
                   return false;
                 }
                 console.log(myLICA);
+
+                var approveAndOverbook = {
+                  orderAction: {
+                    attributes: { 'xsi:type': 'ApproveAndOverbookOrders' },
+                    skipInventoryCheck: true
+                  },
+                  filterStatement: { query: 'WHERE id = ' + myOrder.rval[0].id }
+                };
+
+                //, { filterStatement: DfpClass.Statement('id = ' + myOrder.rval[0].id) }];
+
+                orderService.performOrderAction(approveAndOverbook, function (err, approval) {
+                  if (err) {
+                    console.log(err.response.body);
+                    return false;
+                  }
+                  console.log(approval);
+                });
               });
             });
           });
