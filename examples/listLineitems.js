@@ -11,8 +11,8 @@ dfpUser.getService('LineItemService', function (lineItemService) {
   var query = new Dfp.Statement('LIMIT 10');
 
   lineItemService.getLineItemsByStatement(query, function (err, results) {
-  	if (err)
-  		return console.log('ERROR', err);
+    if (err)
+      return console.log('ERROR', err);
     console.log('results', results);
   });
 });
