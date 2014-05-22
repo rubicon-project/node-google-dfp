@@ -8,7 +8,7 @@ dfpUser.setSettings(dfpConfig);
 
 dfpUser.getService('OrderService', function (orderService) {
   var args = { orders: [{
-      name: 'Full Campaign #27',
+      name: 'Full Campaign #40',
       notes: 'It cannot be this simple!',
       advertiserId: '10209990',                 // Must correspond to an advertiserId in your DFP instance
       traffickerId: '50819180'                  // Must correspond to an traffickerId in your DFP instance
@@ -44,8 +44,6 @@ dfpUser.getService('OrderService', function (orderService) {
         targeting: { inventoryTargeting: { targetedPlacementIds: '3980'} }
       }]};
 
-      console.log(li.lineItems[0].startDateTime);
-      console.log(li.lineItems[0].costPerUnit);
       lineItemService.createLineItems(li, function (err, myLineItem) {
         if (err) {
           console.log(err.response.body);
@@ -53,8 +51,47 @@ dfpUser.getService('OrderService', function (orderService) {
         }
         console.log(myLineItem);
 
+        dfpUser.getService('CreativeService', function (creativeService) {
+          var cr = { creatives: [{
+            attributes: { 'xsi:type': 'ImageCreative' },  // Read Creative.Type - https://developers.google.com/doubleclick-publishers/docs/reference/v201403/CreativeService.BaseImageCreative
+            advertiserId: '10209990',                     // Must correspond to an advertiserId in your DFP instance
+            name: 'My Creative #1',
+            size: {
+              width: 728,
+              height: 90,
+              isAspectRatio: false
+            },
+            destinationUrl: 'www.google.com',
+            primaryImageAsset: {
+              assetByteArray: Dfp.assetByteArray('/home/img/Pictures/myPic.jpg'), // Use your own creative
+              fileName: 'image_name_001'
+            }
+          }]};
+
+          creativeService.createCreatives(cr, function (err, myCreative) {
+            if (err) {
+              console.log(err.response.body);
+              return false;
+            }
+            console.log(myCreative);
+
+            dfpUser.getService('LineItemCreativeAssociationService', function (licaService) {
+              var lica = { lineItemCreativeAssociations: [{
+                lineItemId: myLineItem.rval[0].id,
+                creativeId: myCreative.rval[0].id
+              }]};
+
+              licaService.createLineItemCreativeAssociations(lica, function (err, myLICA) {
+                if (err) {
+                  console.log(err.response.body);
+                  return false;
+                }
+                console.log(myLICA);
+              });
+            });
+          });
+        });
       });
     });
   });
 });
-
