@@ -8,20 +8,74 @@ dfpUser.setSettings(dfpConfig);
 
 dfpUser.getService('ReportService', function (reportService) {
 
-  var reportJob = {
-    dimensions : [ 'DATE' ],
-    columns : [ 'AD_SERVER_CLICKS', 'AD_SERVER_IMPRESSIONS' ],
-    dimensionAttributes : [],
-    startDate : new Date('2014-05-01').ToDfpDate(),
-    endDate : new Date('2014-05-21').ToDfpDate(),
-    dimensionFilters : [],
-    statement : new Dfp.Statement('WHERE LINE_ITEM_ID = 1234567'),
-    timeZone : 'America/New_York'
+  var intervalId = null;
+  var results = null;
+  var args = {
+    reportJob: {
+      reportQuery: {
+        dimensions: ['DATE'],
+        columns: [ 'AD_SERVER_CLICKS', 'AD_SERVER_IMPRESSIONS' ],
+        dimensionAttributes : [],
+        startDate: { year: 2014, month: 5, day: 22 },
+        endDate: { year: 2014, month: 6, day: 21 },
+        dimensionFilters : [],
+        statement: { query : 'WHERE LINE_ITEM_ID = 123456789'}
+      }
+    }
   };
 
-  reportService.runReportJob(reportJob, function (err, results) {
-    if (err)
-      return console.log('ERROR', err);
-    console.log('results', results);
+  function download_report () {
+
+    var reportId = results.rval.id;
+    console.log('Trying to get report #' + reportId);
+
+    reportService.getReportJob({reportJobId : reportId}, function (err, data) {
+
+      if (err) {
+        return console.log('ERROR', err);
+      }
+      console.log('Report Job #' + reportId + ' returned ' + data.rval.reportJobStatus);
+
+      if (data.rval.reportJobStatus === 'COMPLETED') {
+
+        var download_args = {
+          reportJobId           : reportId,
+          reportDownloadOptions : {
+            exportFormat            : 'CSV_EXCEL',
+            includeReportProperties : false,
+            includeTotalsRow        : false,
+            useGzipCompression      : true
+          }
+        };
+
+        reportService.getReportDownloadUrlWithOptions(download_args, function (err, data) {
+          if (err) {
+            return console.log('ERROR', err.body);
+          }
+
+          console.log(data);
+        });
+      }
+
+      if (data.rval.reportJobStatus === 'FAILED') {
+        console.log('Report Failed!');
+      }
+
+      if (data.rval.reportJobStatus === 'IN_PROGRESS') {
+        setTimeout(download_report, 100);
+      }
+
+    });
+  }
+
+  reportService.runReportJob(args, function (err, jobStatus) {
+    if (err) {
+      return console.log('ERROR', err.body);
+    }
+
+    results = jobStatus;
+    setTimeout(download_report, 100);
+
   });
+
 });
