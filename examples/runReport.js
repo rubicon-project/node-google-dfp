@@ -24,7 +24,7 @@ dfpUser.getService('ReportService', function (reportService) {
     }
   };
 
-  function download_report () {
+  function check_report_ready () {
 
     var reportId = results.rval.id;
     console.log('Trying to get report #' + reportId);
@@ -53,7 +53,8 @@ dfpUser.getService('ReportService', function (reportService) {
             return console.log('ERROR', err.body);
           }
 
-          console.log(data);
+          console.log("Downloading report from " + data.rval);
+          download_report(data.rval, 'downloaded_report.csv');
         });
       }
 
@@ -62,11 +63,22 @@ dfpUser.getService('ReportService', function (reportService) {
       }
 
       if (data.rval.reportJobStatus === 'IN_PROGRESS') {
-        setTimeout(download_report, 100);
+        setTimeout(check_report_ready, 100);
       }
 
     });
-  }
+  };
+
+  function download_report (download_url, local_filename) {
+    var https = require('https');
+    var fs = require('fs');
+    var zlib = require('zlib');
+
+    var file = fs.createWriteStream(local_filename);
+    var request = https.get(download_url, function(response) {
+      response.pipe(zlib.createGunzip()).pipe(file);
+    });
+  };
 
   reportService.runReportJob(args, function (err, jobStatus) {
     if (err) {
@@ -74,7 +86,7 @@ dfpUser.getService('ReportService', function (reportService) {
     }
 
     results = jobStatus;
-    setTimeout(download_report, 100);
+    setTimeout(check_report_ready, 100);
 
   });
 
