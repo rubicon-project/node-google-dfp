@@ -5,8 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "googleapis": "^0.7.0",
-    "soap": "~0.4.2",
-    "fs": "~0.10.32"
+    "soap": "~0.4.2"
   },
   "devDependencies": {
     "googleapis": "^0.7.0",
