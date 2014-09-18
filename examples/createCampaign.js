@@ -1,7 +1,7 @@
 // List lineitems
 
-var Dfp = require('../lib/Dfp');
-var dfpConfig = require('/dfpCredentials');
+var Dfp = require('node-google-dfp');
+var dfpConfig = require('./dfpCredentials');
 
 var dfpUser = new Dfp.User(dfpConfig.networkCore, dfpConfig.applicationName);
 dfpUser.setSettings(dfpConfig);
@@ -95,8 +95,6 @@ dfpUser.getService('OrderService', function (orderService) {
                   },
                   filterStatement: { query: 'WHERE id = ' + myOrder.rval[0].id }
                 };
-
-                //, { filterStatement: DfpClass.Statement('id = ' + myOrder.rval[0].id) }];
 
                 orderService.performOrderAction(approveAndOverbook, function (err, approval) {
                   if (err) {

@@ -1,7 +1,7 @@
 // List lineitems
 
-var Dfp = require('../lib/Dfp');
-var dfpConfig = require('/dfpCredentials');
+var Dfp = require('node-google-dfp');
+var dfpConfig = require('./dfpCredentials');
 
 var dfpUser = new Dfp.User(dfpConfig.networkCore, dfpConfig.applicationName);
 dfpUser.setSettings(dfpConfig);
