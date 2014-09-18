@@ -7,10 +7,6 @@
     "googleapis": "^0.7.0",
     "soap": "~0.4.2"
   },
-  "devDependencies": {
-    "googleapis": "^0.7.0",
-    "soap": "^0.4.4"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
