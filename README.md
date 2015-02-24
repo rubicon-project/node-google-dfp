@@ -41,9 +41,9 @@ This application requires a working oAuth refresh token to make requests. If you
 
 To setup a refresh token manually, follow [Google's instructions](https://developers.google.com/accounts/docs/OAuth2ForDevices#obtainingatoken) for using cURL. The main steps are included below.
 
-0. Setup a oAuth "installed application" in the Google Developer Console.
+*  Setup a oAuth "installed application" in the Google Developer Console.
 
-1. Create a verification request using this installed application's client ID. (If you miss this step you'll get an `authorization_pending` error from Google on the next step.) Note that any slashes in a `device_code` will need to be escaped.
+* Create a verification request using this installed application's client ID. (If you miss this step you'll get an `authorization_pending` error from Google on the next step.) Note that any slashes in a `device_code` will need to be escaped.
 
 ```curl -d "client_id={YOUR_OAUTH_CLIENT_ID}&scope=email profile" https://accounts.google.com/o/oauth2/device/code```
     
@@ -56,11 +56,19 @@ To setup a refresh token manually, follow [Google's instructions](https://develo
     }
     
 
-2. Visit the `verification_url` contained in the verification request response (e.g. https://www.google.com/device) in a browser and type in the `user_code` provided in the verification response. A verification code will be given as a response.
+* Visit the `verification_url` contained in the verification request response (e.g. https://www.google.com/device) in a browser and type in the `user_code` provided in the verification response. A verification code will be given as a response.
 
-3. Use the provided `code` and your client ID and secret from the Google oAuth application to create a refresh token.
+* Use the provided `code` and your client ID and secret from the Google oAuth application to create a refresh token.
 
 ```curl -d "client_id={YOUR_OAUTH_CLIENT_ID}&client_secret={YOUR_OAUTH_CLIENT_SECRET}&code={YOUR_VERIFICATION_CODE}&grant_type=http://oauth.net/grant_type/device/1.0" https://accounts.google.com/o/oauth2/token```
+    
+    {
+      "access_token" : "ya29.JAHynQpVpjBFhvg-7VKdQ7nmD0DkmCYoWTWo535TP8QsKa6j2rFOI1i0pdclFepv_GZo9A2SrN41dA",
+      "token_type" : "Bearer",
+      "expires_in" : 3600,
+      "id_token" : "eyJhbGciOiJSUzI1NiIsImtpZCI6IjdjZmM3YTJhMDkwYWJjOGYxMDU5MjJmMzFiN2FjZGUzYzA2NmU1NTYifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiaWQiOiIxMTU2MjQxNzA0MjQ3NzA5NDYzNzgiLCJzdWIiOiIxMTU2MjQxNzA0MjQ3NzA5NDYzNzgiLCJhenAiOiI4MzQ3MDQ2OTI1ODItMzlwY3I2M2RmNjBlZjByY2E5ZTc1cDRicTlzbjhxOWUuYXBwcy5nb29nbyV1c2VyY29udGVudC5jb20iLCJlbWFpbCI6InRheWxvci5idWxleUBtY25hdWdodG9uLm1lZGlhIiwiYXRfaGFzaCI6Ikp2Sl9JUDlxUk9zX1JUNDBoY0FSWVEiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXVkIjoiODM0NzA0HjkyNTgyLTM5cGNyNjNkZjYwZWYwcmNhOWU3NXA0YnE5c244cTllLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaGQiOiJtY25hdWdodG9uLm1lZGlhIiwidG9rZW5faGFzaCI6Ikp2Sl9JSDlxUk9zX1JUNDBoY0FSWVEiLCJ2ZXJpZmllZF9lbWFpbCI6dHJ1ZSwiY2lkIjoiODM0NzA0NjkyNTgyLTM5cGNyNjNkZjYwZWYwcmNhOWU3NXA0YnE5c244cTllLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNDI0ODAwNDcwLCJleHAiOjE0MjQ4MDQzNzB9.T9mTcSl5bJLKrFhldXOd1L1CnGFfZHNF1eQOmJYyp7wR3vKbz8ATTNAfyo8_2hSGt9kGrHDBcdgaq_18RYS72Tt0MclNy020romjl6rYRjs6GH93S3ZMiwra3UI3kmDXym9kyntedMS5gIPgJWfcoh0J0CTDNPBisLNrZntJv7Y",
+      "refresh_token" : "1/CGpCHgTgJ28PMnh84PgQBOgHHHaLCDbDQ_0ZiINmO_g"
+    }
 
 You can use `urn:ietf:wg:oauth:2.0:oob` for the redirect URL of non-public apps.
 
