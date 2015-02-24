@@ -45,7 +45,7 @@ To setup a refresh token manually, follow [Google's instructions](https://develo
 
 * Create a verification request using this installed application's client ID. (If you miss this step you'll get an `authorization_pending` error from Google on the next step.) Note that any slashes in a `device_code` will need to be escaped.
 
-```curl -d "client_id={YOUR_OAUTH_CLIENT_ID}&scope=email profile" https://accounts.google.com/o/oauth2/device/code```
+```curl -d "client_id={YOUR_OAUTH_CLIENT_ID}&scope=https://www.googleapis.com/auth/dfp" https://accounts.google.com/o/oauth2/device/code```
     
     {
       "device_code" : "ABCD-EFGH4/MEiMYvOO1THXLV_fHGGN8obAgb5XFs1Uctj-QsyYsQk",
