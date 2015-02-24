@@ -35,6 +35,34 @@ dfpUser.getService('LineItemService', function (lineItemService) {
 });
 ```
 
+### oAuth setup
+
+This application requires a working oAuth refresh token to make requests. If you don't include a refresh token you will get an "No refresh token is set" error. If you include a bad token, you'll get an "illegal access" error. Service accounts are not supported.
+
+To setup a refresh token manually, follow [Google's instructions](https://developers.google.com/accounts/docs/OAuth2ForDevices#obtainingatoken) for using cURL. The main steps are included below.
+
+0. Setup a oAuth "installed application" in the Google Developer Console.
+
+1. Create a verification request using this installed application's client ID. (If you miss this step you'll get an `authorization_pending` error from Google on the next step.) Note that any slashes in a `device_code` will need to be escaped.
+
+```curl -d "client_id={YOUR_OAUTH_CLIENT_ID}&scope=email profile" https://accounts.google.com/o/oauth2/device/code```
+    
+    {
+      "device_code" : "ABCD-EFGH4/MEiMYvOO1THXLV_fHGGN8obAgb5XFs1Uctj-QsyYsQk",
+      "user_code" : "ABCD-EFGH",
+      "verification_url" : "https://www.google.com/device",
+      "expires_in" : 1800,
+      "interval" : 5
+    }
+    
+
+2. Visit the `verification_url` contained in the verification request response (e.g. https://www.google.com/device) in a browser and type in the `user_code` provided in the verification response. A verification code will be given as a response.
+
+3. Use the provided `code` and your client ID and secret from the Google oAuth application to create a refresh token.
+
+```curl -d "client_id={YOUR_OAUTH_CLIENT_ID}&client_secret={YOUR_OAUTH_CLIENT_SECRET}&code={YOUR_VERIFICATION_CODE}&grant_type=http://oauth.net/grant_type/device/1.0" https://accounts.google.com/o/oauth2/token```
+
+You can use `urn:ietf:wg:oauth:2.0:oob` for the redirect URL of non-public apps.
 
 Known Issues
 ------------
