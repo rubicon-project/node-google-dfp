@@ -5,8 +5,8 @@
 Initialize the DFP Instance.
 
 ```JavaScript
-var Dfp = require('node-google-dfp');
-var dfpUser = new DfpClass.User(NETWORK_CODE, APP_NAME, VERSION);
+var Dfp = require('node-google-dfp'),
+    dfpUser = new Dfp.User(NETWORK_CODE, APP_NAME, VERSION);
 ```
 
 Next, setup your client settings and your user's OAUTH token information.
