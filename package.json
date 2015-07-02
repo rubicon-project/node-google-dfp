@@ -11,6 +11,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "ShinyAds",
+  "contributors":[{
+    "name": "Andre de Souza",
+    "email": "ajsouz@gmail.com"
+    }],
   "license": "ISC",
   "repository": {
     "type": "git",
