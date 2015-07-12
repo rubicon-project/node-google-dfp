@@ -3,12 +3,15 @@
   "version": "0.1.6",
   "description": "Google DFP API Helper Library for NodeJS",
   "main": "index.js",
+  "devDependencies": {
+    "jasmine-node": "^1.15.5"
+  },
   "dependencies": {
     "googleapis": "^0.7.0",
     "soap": "0.5.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine-node ."
   },
   "author": "ShinyAds",
   "contributors":[{
