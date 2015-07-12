@@ -4,7 +4,7 @@
   "description": "Google DFP API Helper Library for NodeJS",
   "main": "index.js",
   "devDependencies": {
-    "jasmine-node": "1.15.5"
+    "jasmine-node": "1.14.5"
   },
   "dependencies": {
     "googleapis": "^0.7.0",
