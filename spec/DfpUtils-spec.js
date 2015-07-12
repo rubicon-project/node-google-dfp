@@ -1,8 +1,8 @@
 var DfpUtils = require('../lib/DfpUtils');
 
 describe("DfpUtils", function () {
-  describe(".DfpDate", function () {
-    it("should convert now to DFP date now", function () {
+  describe(".DfpDate.from", function () {
+    it("should convert JS Date to DFP", function () {
       var curr_date = new Date(),
         dfp_date    = DfpUtils.DfpDate.from(new Date(), 'America/Toronto'),
         result      = { date : {
@@ -10,11 +10,11 @@ describe("DfpUtils", function () {
           month : curr_date.getMonth() + 1,
           day   : curr_date.getDate()
         },
-        hour       : curr_date.getHours(),
-        minute     : curr_date.getMinutes(),
-        second     : dfp_date.second,
-        timeZoneID : dfp_date.timeZoneID
-      };
+          hour       : curr_date.getHours(),
+          minute     : curr_date.getMinutes(),
+          second     : dfp_date.second,
+          timeZoneID : dfp_date.timeZoneID
+          };
 
       expect(dfp_date.date.year).toBe(result.date.year);
       expect(dfp_date.date.month).toBe(result.date.month);
@@ -24,7 +24,50 @@ describe("DfpUtils", function () {
       expect(dfp_date.minute).toBe(result.minute);
     });
   });
-  describe("DfpStatement", function () {
+  describe(".DfpDate.to", function () {
+    it("should convert DFP Date to JS", function () {
+      var curr_date = new Date(),
+        dfp_date    = { date : {
+          year  : curr_date.getFullYear(),
+          month : curr_date.getMonth(),
+          day   : curr_date.getDate()
+        },
+          hour       : curr_date.getHours(),
+          minute     : curr_date.getMinutes(),
+          second     : curr_date.getSeconds(),
+          timeZoneID : 'America/Toronto'
+          },
+      js_date         = DfpUtils.DfpDate.to(dfp_date);
 
+      expect(js_date.getFullYear()).toBe(curr_date.getFullYear());
+      expect(js_date.getMonth()).toBe(curr_date.getMonth());
+      expect(js_date.getDate()).toBe(curr_date.getDate());
+
+      expect(js_date.getHours()).toBe(curr_date.getHours());
+      expect(js_date.getMinutes()).toBe(curr_date.getMinutes());
+      expect(js_date.getSeconds()).toBe(curr_date.getSeconds());
+    });
+  });
+  describe(".Statement", function () {
+    it("should convert query to DFP Statement", function () {
+      var dfp_statement = new DfpUtils.Statement('WHERE id > 10 LIMIT 10'),
+        expected_query  = {
+          filterStatement : {
+            query : 'WHERE id > 10 LIMIT 10'
+          }
+        };
+      expect(dfp_statement.filterStatement.query).toBe(expected_query.filterStatement.query);
+    });
+  });
+  describe(".Money", function () {
+    it("should convert query to DFP Statement", function () {
+      var dfp_statement = new DfpUtils.Money(5.7, 'CAD'),
+        expected_query  = {
+          currencyCode  : 'CAD',
+          microAmount   : 5700000
+        };
+      expect(dfp_statement.currencyCode).toBe(expected_query.currencyCode);
+      expect(dfp_statement.microAmount).toBe(expected_query.microAmount);
+    });
   });
 });
