@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/ShinyAds/node-google-dfp.svg?branch=master)](https://travis-ci.org/ShinyAds/node-google-dfp)
 # Google DFP API Client for NodeJS
 
 ## Basics
