@@ -36,7 +36,6 @@ dfpUser.getService('LineItemService', function (lineItemService) {
 });
 ```
 
-<<<<<<< HEAD
 ### Service accounts example
 
 If you would like to use a Google [Service Account](https://developers.google.com/doubleclick-publishers/docs/service_accounts) to access DFP, you can do so by creating an instance of the JWT auth client.
@@ -66,7 +65,7 @@ To setup a refresh token manually, follow [Google's instructions](https://develo
 * Create a verification request using this installed application's client ID. (If you miss this step you'll get an `authorization_pending` error from Google on the next step.) Note that any slashes in a `device_code` will need to be escaped.
 
 ```curl -d "client_id={YOUR_OAUTH_CLIENT_ID}&scope=https://www.googleapis.com/auth/dfp" https://accounts.google.com/o/oauth2/device/code```
-    
+
     {
       "device_code" : "ABCD-EFGH4/MEiMYvOO1THXLV_fHGGN8obAgb5XFs1Uctj-QsyYsQk",
       "user_code" : "ABCD-EFGH",
@@ -74,14 +73,14 @@ To setup a refresh token manually, follow [Google's instructions](https://develo
       "expires_in" : 1800,
       "interval" : 5
     }
-    
+
 
 * Visit the `verification_url` contained in the verification request response (e.g. https://www.google.com/device) in a browser and type in the `user_code` provided in the verification response. A verification code will be given as a response.
 
 * Use the provided `code` and your client ID and secret from the Google oAuth application to create a refresh token.
 
 ```curl -d "client_id={YOUR_OAUTH_CLIENT_ID}&client_secret={YOUR_OAUTH_CLIENT_SECRET}&code={YOUR_VERIFICATION_CODE}&grant_type=http://oauth.net/grant_type/device/1.0" https://accounts.google.com/o/oauth2/token```
-    
+
     {
       "access_token" : "ya29.JAHynQpVpjBFhvg-7VKdQ7nmD0DkmCYoWTWo535TP8QsKa6j2rFOI1i0pdclFepv_GZo9A2SrN41dA",
       "token_type" : "Bearer",
@@ -91,7 +90,6 @@ To setup a refresh token manually, follow [Google's instructions](https://develo
     }
 
 You can use `urn:ietf:wg:oauth:2.0:oob` for the redirect URL of non-public apps.
->>>>>>> 90566fe92e74ff3a081a15507ef31806216fe4dd
 
 Known Issues
 ------------
