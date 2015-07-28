@@ -1,0 +1,14 @@
+{
+  "browser"      : true,
+  "node"         : true,
+  "esnext"       : true,
+  "globals"      : {},
+  "globalstrict" : false,
+  "laxbreak"     : true,
+  "multistr"     : true,
+  "smarttabs"    : false,
+  "trailing"     : true,
+  "undef"        : false,
+  "unused"       : true,
+  "indent"       : 2
+}

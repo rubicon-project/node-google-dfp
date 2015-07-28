@@ -8,7 +8,6 @@ dfpUser.setSettings(dfpConfig);
 
 dfpUser.getService('ReportService', function (reportService) {
 
-  var intervalId = null;
   var results = null;
   var args = {
     reportJob: {
@@ -24,7 +23,20 @@ dfpUser.getService('ReportService', function (reportService) {
     }
   };
 
-  function check_report_ready () {
+
+  function download_report(download_url, local_filename) {
+    var https = require('https');
+    var fs = require('fs');
+    var zlib = require('zlib');
+
+    var file = fs.createWriteStream(local_filename);
+    https.get(download_url, function (response) {
+      response.pipe(zlib.createGunzip()).pipe(file);
+    });
+  }
+
+
+  function check_report_ready() {
 
     var reportId = results.rval.id;
     console.log('Trying to get report #' + reportId);
@@ -67,18 +79,7 @@ dfpUser.getService('ReportService', function (reportService) {
       }
 
     });
-  };
-
-  function download_report (download_url, local_filename) {
-    var https = require('https');
-    var fs = require('fs');
-    var zlib = require('zlib');
-
-    var file = fs.createWriteStream(local_filename);
-    var request = https.get(download_url, function(response) {
-      response.pipe(zlib.createGunzip()).pipe(file);
-    });
-  };
+  }
 
   reportService.runReportJob(args, function (err, jobStatus) {
     if (err) {
