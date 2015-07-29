@@ -3,6 +3,7 @@ node_js:
   - "stable"
 before_install:
   - npm install -g grunt-cli
+  - npm install jasmine-node -g
   - npm install -g istanbul
   - npm install -g codeclimate-test-reporter
 sudo: false
