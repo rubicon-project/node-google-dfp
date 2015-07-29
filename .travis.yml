@@ -6,7 +6,7 @@ before_install:
   - npm install -g istanbul
   - npm install -g codeclimate-test-reporter
 before_script:
-  - istanbul cover jasmine-node
+  - istanbul cover jasmine-node .
 sudo: false
 addons:
   code_climate:
