@@ -3,10 +3,13 @@ node_js:
   - "stable"
 before_install:
   - npm install -g grunt-cli
-  - npm install jasmine-node -g
+  - npm install -g jasmine-node
   - npm install -g istanbul
   - npm install -g codeclimate-test-reporter
 sudo: false
+script:
+  - grunt lint
+  - jasmine-node .
 addons:
   code_climate:
     repo_token:a9ce2000c9aa1298fe539c2e6479d56e60d210336c6f8f189a5b4a4b6d774a2e
