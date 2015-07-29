@@ -72,9 +72,13 @@ describe("DfpUtils", function () {
   });
   describe(".assetByteArray", function () {
     it("should convert image to assetByteArray", function () {
-      var dfp_image     = DfpUtils.assetByteArray('./spec/FF4D00-0.8.png'),
-        expected_image  = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEX/TQBcNTh/AAAAAXRSTlPM0jRW/QAAAApJREFUeJxjYgAAAAYAAzY3fKgAAAAASUVORK5CYII=";
-      expect(dfp_image).toBe(expected_image);
+      var dfp_image_1   = DfpUtils.assetByteArray('./spec/FF4D00-0.8.png'),
+        expected_image  = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEX/TQBcNTh/AAAAAXRSTlPM0jRW/QAAAApJREFUeJxjYgAAAAYAAzY3fKgAAAAASUVORK5CYII=",
+        dfp_image_2     = DfpUtils.assetByteArray(''),
+        expect_image_2  = "";
+
+      expect(dfp_image_1).toBe(expected_image);
+      expect(dfp_image_2).toBe(expect_image_2);
     });
   });
 });
