@@ -24,6 +24,16 @@ describe("DfpUser", function () {
       expect(settingsStuct.client_secret).toBe('client_secret');
       expect(settingsStuct.redirect_url).toBe('redirect_url');
       expect(settingsStuct.refresh_token).toBe('refresh_token');
+
+      var header = dfpSetup.getSOAPHeader();
+      expect(header.RequestHeader.attributes['soapenv:actor']).toBe('http://schemas.xmlsoap.org/soap/actor/next');
+      expect(header.RequestHeader.attributes['soapenv:mustUnderstand']).toBe(0);
+      expect(header.RequestHeader.attributes['xsi:type']).toBe('ns1:SoapRequestHeader');
+      expect(header.RequestHeader.attributes['xmlns:ns1']).toBe('https://www.google.com/apis/ads/publisher/' + dfpSetup.version);
+      expect(header.RequestHeader.attributes['xmlns:xsi']).toBe('http://www.w3.org/2001/XMLSchema-instance');
+      expect(header.RequestHeader.attributes['xmlns:soapenv']).toBe('http://schemas.xmlsoap.org/soap/envelope/');
+      expect(header.RequestHeader['ns1:networkCode']).toBe(dfpSetup.networkCode);
+      expect(header.RequestHeader['ns1:applicationName']).toBe(dfpSetup.applicationName);
     });
   });
 });
