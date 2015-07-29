@@ -60,7 +60,7 @@ describe("DfpUtils", function () {
     });
   });
   describe(".Money", function () {
-    it("should convert query to DFP Statement", function () {
+    it("should convert money to DFP micro amounts", function () {
       var dfp_statement = new DfpUtils.Money(5.7, 'CAD'),
         expected_query  = {
           currencyCode  : 'CAD',
@@ -68,6 +68,13 @@ describe("DfpUtils", function () {
         };
       expect(dfp_statement.currencyCode).toBe(expected_query.currencyCode);
       expect(dfp_statement.microAmount).toBe(expected_query.microAmount);
+    });
+  });
+  describe(".assetByteArray", function () {
+    it("should convert image to assetByteArray", function () {
+      var dfp_image     = DfpUtils.assetByteArray('./spec/FF4D00-0.8.png'),
+        expected_image  = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABAQMAAAAl21bKAAAAA1BMVEX/TQBcNTh/AAAAAXRSTlPM0jRW/QAAAApJREFUeJxjYgAAAAYAAzY3fKgAAAAASUVORK5CYII=";
+      expect(dfp_image).toBe(expected_image);
     });
   });
 });
