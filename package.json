@@ -1,6 +1,6 @@
 {
   "name": "node-google-dfp",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Google DFP API Helper Library for NodeJS",
   "main": "index.js",
   "devDependencies": {
