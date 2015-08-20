@@ -6,7 +6,10 @@ var dfpConfig = require('./dfpCredentials');
 var dfpUser = new Dfp.User(dfpConfig.networkCore, dfpConfig.applicationName);
 dfpUser.setSettings(dfpConfig);
 
-dfpUser.getService('ReportService', function (reportService) {
+dfpUser.getService('ReportService', function (err, reportService) {
+  if (err) {
+    return console.error(err);
+  }
 
   var results = null;
   var args = {
