@@ -6,7 +6,10 @@ var dfpConfig = require('./dfpCredentials');
 var dfpUser = new Dfp.User(dfpConfig.networkCore, dfpConfig.applicationName);
 dfpUser.setSettings(dfpConfig);
 
-dfpUser.getService('LineItemService', function (lineItemService) {
+dfpUser.getService('LineItemService', function (err, lineItemService) {
+  if (err) {
+    return console.error(err);
+  }
 
   var query = new Dfp.Statement('LIMIT 10');
 

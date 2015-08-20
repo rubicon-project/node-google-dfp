@@ -6,8 +6,12 @@ var dfpConfig = require('/dfpCredentials');
 var dfpUser = new Dfp.User(dfpConfig.networkCore, dfpConfig.applicationName);
 dfpUser.setSettings(dfpConfig);
 
-dfpUser.getService('OrderService', function (orderService) {
-  var args = { 
+dfpUser.getService('OrderService', function (err, orderService) {
+  if (err) {
+    return console.error(err);
+  }
+
+  var args = {
     orders: [
       {
         name: 'Multiple NodeJS Order Creation #1',

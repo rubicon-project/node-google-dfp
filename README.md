@@ -25,7 +25,10 @@ You can instance any of DFP's API Services; https://developers.google.com/double
 
 
 ```JavaScript
-dfpUser.getService('LineItemService', function (lineItemService) {
+dfpUser.getService('LineItemService', function (err, lineItemService) {
+  if (err) {
+    return console.error(err);
+  }
 
   var statement = new DfpClass.Statement('WHERE id = 103207340');
 

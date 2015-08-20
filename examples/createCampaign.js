@@ -6,7 +6,12 @@ var dfpConfig = require('./dfpCredentials');
 var dfpUser = new Dfp.User(dfpConfig.networkCore, dfpConfig.applicationName);
 dfpUser.setSettings(dfpConfig);
 
-dfpUser.getService('OrderService', function (orderService) {
+dfpUser.getService('OrderService', function (err, orderService) {
+  if (err) {
+    console.error(err);
+    return false;
+  }
+
   var args = { orders: [{
       name: 'Full Campaign #67',
       notes: 'It cannot be this simple!',
@@ -21,7 +26,12 @@ dfpUser.getService('OrderService', function (orderService) {
     }
     console.log(myOrder);
 
-    dfpUser.getService('LineItemService', function (lineItemService) {
+    dfpUser.getService('LineItemService', function (err, lineItemService) {
+      if (err) {
+        console.error(err);
+        return false;
+      }
+
       var li = { lineItems: [{
         orderId: parseFloat(myOrder.rval[0].id),
         name: 'Lineitem descriptive name #10',
@@ -51,7 +61,12 @@ dfpUser.getService('OrderService', function (orderService) {
         }
         console.log(myLineItem);
 
-        dfpUser.getService('CreativeService', function (creativeService) {
+        dfpUser.getService('CreativeService', function (err, creativeService) {
+          if (err) {
+            console.error(err);
+            return false;
+          }
+
           var cr = { creatives: [{
             attributes: { 'xsi:type': 'ImageCreative' },  // Read Creative.Type - https://developers.google.com/doubleclick-publishers/docs/reference/v201403/CreativeService.BaseImageCreative
             advertiserId: '10209990',                     // Must correspond to an advertiserId in your DFP instance
@@ -75,7 +90,12 @@ dfpUser.getService('OrderService', function (orderService) {
             }
             console.log(myCreative);
 
-            dfpUser.getService('LineItemCreativeAssociationService', function (licaService) {
+            dfpUser.getService('LineItemCreativeAssociationService', function (err, licaService) {
+              if (err) {
+                console.error(err);
+                return false;
+              }
+
               var lica = { lineItemCreativeAssociations: [{
                 lineItemId: myLineItem.rval[0].id,
                 creativeId: myCreative.rval[0].id
