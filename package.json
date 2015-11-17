@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "googleapis": "^0.7.0",
-    "soap": "^0.9.0"
+    "package": "git+https://github.com/vpulim/node-soap.git#93c89771178a3664446945af360e51441368e9ec"
   },
   "scripts": {
     "test": "grunt all"
