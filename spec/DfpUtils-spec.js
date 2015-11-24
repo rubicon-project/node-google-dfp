@@ -70,6 +70,17 @@ describe("DfpUtils", function () {
       expect(dfp_statement.microAmount).toBe(expected_query.microAmount);
     });
   });
+  describe(".Money", function () {
+    it("should convert money to DFP micro amounts without rounding issues", function () {
+      var dfp_statement = new DfpUtils.Money(418/100, 'CAD'),
+        expected_query  = {
+          currencyCode  : 'CAD',
+          microAmount   : 4180000
+        };
+      expect(dfp_statement.currencyCode).toBe(expected_query.currencyCode);
+      expect(dfp_statement.microAmount).toBe(expected_query.microAmount);
+    });
+  });
   describe(".assetByteArray", function () {
     it("should convert image to assetByteArray", function () {
       var dfp_image_1   = DfpUtils.assetByteArray('./spec/FF4D00-0.8.png'),
