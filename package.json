@@ -11,16 +11,18 @@
   },
   "dependencies": {
     "googleapis": "^0.7.0",
-    "soap": "^0.9.0"
+    "soap": "^0.11.1"
   },
   "scripts": {
     "test": "grunt all"
   },
   "author": "ShinyAds",
-  "contributors":[{
-    "name": "Andre de Souza",
-    "email": "ajsouz@gmail.com"
-    }],
+  "contributors": [
+    {
+      "name": "Andre de Souza",
+      "email": "ajsouz@gmail.com"
+    }
+  ],
   "license": "ISC",
   "repository": {
     "type": "git",
@@ -31,6 +33,9 @@
   },
   "homepage": "https://github.com/ShinyAds/node-google-dfp",
   "keywords": [
-    "Google", "DFP", "DoubleClick", "adserver"
+    "Google",
+    "DFP",
+    "DoubleClick",
+    "adserver"
   ]
 }
