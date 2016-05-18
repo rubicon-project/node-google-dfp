@@ -44,14 +44,14 @@ dfpUser.getService('ReportService', function (err, reportService) {
     var reportId = results.rval.id;
     console.log('Trying to get report #' + reportId);
 
-    reportService.getReportJob({reportJobId : reportId}, function (err, data) {
+    reportService.getReportJobStatus({reportJobId : reportId}, function (err, data) {
 
       if (err) {
         return console.log('ERROR', err);
       }
-      console.log('Report Job #' + reportId + ' returned ' + data.rval.reportJobStatus);
+      console.log('Report Job #' + reportId + ' returned ' + data.rval);
 
-      if (data.rval.reportJobStatus === 'COMPLETED') {
+      if (data.rval === 'COMPLETED') {
 
         var download_args = {
           reportJobId           : reportId,
@@ -73,11 +73,11 @@ dfpUser.getService('ReportService', function (err, reportService) {
         });
       }
 
-      if (data.rval.reportJobStatus === 'FAILED') {
+      if (data.rval === 'FAILED') {
         console.log('Report Failed!');
       }
 
-      if (data.rval.reportJobStatus === 'IN_PROGRESS') {
+      if (data.rval === 'IN_PROGRESS') {
         setTimeout(check_report_ready, 100);
       }
 
