@@ -3,7 +3,7 @@
 var Dfp = require('../lib/Dfp');
 var dfpConfig = require('/dfpCredentials');
 
-var dfpUser = new Dfp.User(dfpConfig.networkCore, dfpConfig.applicationName);
+var dfpUser = new Dfp.User(dfpConfig.networkCode, dfpConfig.applicationName);
 dfpUser.setSettings(dfpConfig);
 
 dfpUser.getService('OrderService', function (err, orderService) {
