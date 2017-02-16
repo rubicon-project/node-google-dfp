@@ -33,7 +33,7 @@ describe("DfpUser", function () {
       expect(header.RequestHeader.attributes['xmlns:xsi']).toBe('http://www.w3.org/2001/XMLSchema-instance');
       expect(header.RequestHeader.attributes['xmlns:soapenv']).toBe('http://schemas.xmlsoap.org/soap/envelope/');
       expect(header.RequestHeader['ns1:networkCode']).toBe(dfpSetup.networkCode);
-      expect(header.RequestHeader['ns1:applicationName']).toBe(dfpSetup.applicationName);
+      expect(header.RequestHeader['ns1:applicationName']).toBe(dfpSetup.applicationName + " " + dfpSetup.userAgent);
     });
   });
 });
