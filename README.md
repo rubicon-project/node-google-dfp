@@ -48,7 +48,7 @@ var google = require('googleapis')
 
 var jwtClient = new google.auth.JWT(
   SERVICE_ACCOUNT_EMAIL,
-  'path/to/key.pem,
+  'path/to/key.pem',
   null,
   ['https://www.googleapis.com/auth/dfp']);
 
