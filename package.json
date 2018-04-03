@@ -21,6 +21,10 @@
     {
       "name": "Andre de Souza",
       "email": "ajsouz@gmail.com"
+    },
+    {
+      "name": "Gregory Pike",
+      "email": "greg@gregpike.ca"
     }
   ],
   "license": "ISC",
