@@ -44,9 +44,9 @@ dfpUser.getService('LineItemService', function (err, lineItemService) {
 If you would like to use a Google [Service Account](https://developers.google.com/doubleclick-publishers/docs/service_accounts) to access DFP, you can do so by creating an instance of the JWT auth client.
 
 ```JavaScript
-var google = require('googleapis')
+var {JWT} = require('google-auth-library')
 
-var jwtClient = new google.auth.JWT(
+var jwtClient = new JWT(
   SERVICE_ACCOUNT_EMAIL,
   'path/to/key.pem',
   null,
