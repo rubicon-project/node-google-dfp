@@ -11,6 +11,31 @@ dfpUser.setSettings(dfpConfig);
 dfpUser.getService('CustomTargetingService', (err, targetingService) => {
 	if (err) throw err;
 
+
+	//create customTargetingKeys
+	createCustomTargetingKeys(targetingService, (err, result) => {
+		if (err) throw err;
+		console.log(result);
+		//expected result:
+
+    // {
+    //   "rval": {
+    //     "totalResultSetSize": 1,
+    //     "startIndex": 0,
+    //     "results": [
+    //       {
+    //         "id": "123456789",
+    //         "name": "AB",
+    //         "displayName": "ABE",
+    //         "type": "FREEFORM",
+    //         "status": "ACTIVE"
+    //       }
+    //     ]
+    //   }
+    // }
+	});
+
+
 	//get customTargetingKeys
 	getCustomTargetingKeys(targetingService, (err, result) => {
 		if (err) throw err;
@@ -52,6 +77,32 @@ dfpUser.getService('CustomTargetingService', (err, targetingService) => {
     //     }
     //   ]
     // }
+	});
+
+
+	//create customTargetingValues
+	createCustomTargetingValues(targetingService, (err, result) => {
+		if (err) throw err;
+		console.log(result);
+
+		//expected result:
+
+    // {
+    //   "rval": {
+    //     "totalResultSetSize": 1,
+    //     "startIndex": 0,
+    //     "results": [
+    //       {
+    //         "customTargetingKeyId":"123456789",
+    //         "id": "1234567897384",
+    //         "name": "DCE",
+    //         "displayName": "DC",
+    //         "matchType":"EXACT",
+    //         "status": "ACTIVE"
+    //       }
+    //     ]
+    //   }
+    // }
 	})
 
 
@@ -79,7 +130,7 @@ dfpUser.getService('CustomTargetingService', (err, targetingService) => {
     //   }
     // }
 
-	})
+	});
 
 	//updateCustomTargetingValues
 	updateCustomTargetingValues(targetingService, (err, result) => {
@@ -99,9 +150,46 @@ dfpUser.getService('CustomTargetingService', (err, targetingService) => {
     //     }
     //   ]
     // }
+	});
+
+	performCustomTargetingValue(targetingService, (err, result) => {
+		if (err) throw err;
+		console.log(result);
+
+		//expected result:
+
+    // {
+    //   {"rval": {"numChanges":1}}
+    // }
 	})
 
 });
+
+let createCustomTargetingKeys = (targetingService, done) => {
+	var args = { keys: [{
+			"name":"AB",
+			"displayName": "ABE"
+			"type":"FREEFORM",
+			"status":"ACTIVE"}
+	]};
+	targetingService.createCustomTargetingKeys(args, (err, results) => {
+		if (err) throw err;
+		done(null, results);
+	})
+}
+
+let createCustomTargetingValues = (targetingService, done) => {
+	var args = { values: [{
+		"customTargetingKeyId":"123456789",
+		"name": "DCE",
+		"displayName": "DC",
+		"status":"ACTIVE"}
+	]};
+	targetingService.createCustomTargetingValues(args, (err, results) => {
+		if (err) throw err;
+		done(null, results);
+	})
+}
 
 
 let getCustomTargetingKeys = (targetingService, done) => {
@@ -140,7 +228,7 @@ let updateCustomTargetingKeys = (targetingService, done) => {
 
 let updateCustomTargetingValues = (targetingService, done) => {
 	var args = { values: [{
-		"customTargetingKeyId":"11704510",
+		"customTargetingKeyId":"123456789",
 		"id":"1234567897384",
 		"name":"DCERZ",
 		"displayName":"DCERZT",
@@ -148,6 +236,19 @@ let updateCustomTargetingValues = (targetingService, done) => {
 		"status":"ACTIVE"}
 	]};
 	targetingService.updateCustomTargetingValues(args, (err, results) => {
+		if (err) throw err;
+		done(null, results);
+	})
+}
+
+let performCustomTargetingValue = (targetingService, done) => {
+	let args = {
+							customTargetingValueAction: {
+								attributes: { 'xsi:type': 'DeleteCustomTargetingValues' }
+							},
+							filterStatement: { query: "WHERE customTargetingKeyId= 11817015 AND name LIKE 'DCERZ'"}
+						};
+	targetingService.performCustomTargetingValueAction(args, (err, results) => {
 		if (err) throw err;
 		done(null, results);
 	})
