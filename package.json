@@ -4,14 +4,14 @@
   "description": "Google DFP API Helper Library for NodeJS",
   "main": "index.js",
   "devDependencies": {
-    "grunt": "^1.0.0",
+    "grunt": "^1.0.4",
     "grunt-jasmine-node": "^0.3.1",
-    "grunt-contrib-jshint": "^1.0.0",
-    "jasmine-node": "1.14.5"
+    "grunt-contrib-jshint": "^2.1.0",
+    "jasmine-node": "^3.0.0"
   },
   "dependencies": {
     "google-auth-library": "^1.3.2",
-    "soap": "^0.13.0"
+    "soap": "^0.29.0"
   },
   "scripts": {
     "test": "grunt all"
@@ -30,12 +30,12 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ShinyAds/node-google-dfp.git"
+    "url": "https://github.com/rubicon-project/node-google-dfp.git"
   },
   "bugs": {
-    "url": "https://github.com/ShinyAds/node-google-dfp/issues"
+    "url": "https://github.com/rubicon-project/node-google-dfp/issues"
   },
-  "homepage": "https://github.com/ShinyAds/node-google-dfp",
+  "homepage": "https://github.com/rubicon-project/node-google-dfp",
   "keywords": [
     "Google",
     "DFP",

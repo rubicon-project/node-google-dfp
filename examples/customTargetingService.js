@@ -52,7 +52,7 @@ dfpUser.getService('CustomTargetingService', (err, targetingService) => {
     //     }
     //   ]
     // }
-	})
+	});
 
 
 	//get customTargetingValues
@@ -79,7 +79,7 @@ dfpUser.getService('CustomTargetingService', (err, targetingService) => {
     //   }
     // }
 
-	})
+	});
 
 	//updateCustomTargetingValues
 	updateCustomTargetingValues(targetingService, (err, result) => {
@@ -99,7 +99,7 @@ dfpUser.getService('CustomTargetingService', (err, targetingService) => {
     //     }
     //   ]
     // }
-	})
+	});
 
 });
 
@@ -109,18 +109,17 @@ let getCustomTargetingKeys = (targetingService, done) => {
 	targetingService.getCustomTargetingKeysByStatement(query, (err, results) => {
 		if (err) throw err;
 		done(null, results);
-	})
-}
+	});
+};
 
 
 let getCustomTargetingValues = (targetingService, done) => {
-  let key = '123456789' //customTargetingKeyId
 	let query = new Dfp.Statement(`WHERE customTargetingKeyId='11704510'`); //put your query statement
 	targetingService.getCustomTargetingValuesByStatement(query, (err, results) => {
 		if (err) throw err;
-		done(null, results)
-	})
-}
+		done(null, results);
+	});
+};
 
 
 let updateCustomTargetingKeys = (targetingService, done) => {
@@ -134,8 +133,8 @@ let updateCustomTargetingKeys = (targetingService, done) => {
 	targetingService.updateCustomTargetingKeys(args, (err, results) => {
 		if (err) throw err;
 		done(null, results);
-	})
-}
+	});
+};
 
 
 let updateCustomTargetingValues = (targetingService, done) => {
@@ -150,5 +149,5 @@ let updateCustomTargetingValues = (targetingService, done) => {
 	targetingService.updateCustomTargetingValues(args, (err, results) => {
 		if (err) throw err;
 		done(null, results);
-	})
-}
+	});
+};
