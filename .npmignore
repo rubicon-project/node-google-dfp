@@ -1,0 +1,8 @@
+.github
+.eslintrc
+.jshintrc
+.travis.yml
+gruntfile.js
+spec
+examples
+yarn.lock
